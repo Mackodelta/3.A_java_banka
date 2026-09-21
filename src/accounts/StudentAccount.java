@@ -25,7 +25,7 @@ public class StudentAccount extends BankAccount {
         double newBalance = balance - amount;
 
         if (newBalance < -5000) {
-            throw new RuntimeException("Balance is negative");
+            throw new RuntimeException("Balance is under negative 5000");
         }
 
         this.balance = newBalance;
