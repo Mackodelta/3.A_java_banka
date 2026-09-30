@@ -1,33 +1,23 @@
 package accounts;
 
-import people.AccountOwner;
+import people.Owner;
 
-public class StudentAccount extends BankAccount {
+public class StudentAccount extends BankAccount
+{
     private String school;
 
-    public StudentAccount(AccountOwner owner, String school) {
+    public StudentAccount(Owner owner, String school) {
         super(owner);
 
         this.school = school;
     }
 
-    public StudentAccount(AccountOwner owner, double balance) {
+    public StudentAccount(Owner owner, double balance) {
         super(owner, balance);
     }
 
     public String getSchool()
     {
         return this.school;
-    }
-    @Override public void sub(double amount){
-        System.out.println("Sub amount is " + amount);
-
-        double newBalance = balance - amount;
-
-        if (newBalance < -5000) {
-            throw new RuntimeException("Balance is under negative 5000");
-        }
-
-        this.balance = newBalance;
     }
 }
