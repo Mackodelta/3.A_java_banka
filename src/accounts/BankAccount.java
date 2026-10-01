@@ -19,7 +19,19 @@ public abstract class BankAccount implements Withdraw {
 
     protected Notifier notifier = new EmailNotifier();
 
-    public BankAccount(String uuid, String accountNumber, Owner owner) {}
+    public BankAccount(String uuid, String accountNumber, Owner owner) {
+        this.uuid = uuid;
+        this.accountNumber = accountNumber;
+        this.owner = owner;
+        this.balance = 0;
+    }
+    public String getAccountNumber() {
+        return this.accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 
     public BankAccount(Owner owner) {
         this.owner = owner;

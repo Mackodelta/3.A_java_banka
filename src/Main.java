@@ -1,8 +1,12 @@
 import accounts.BankAccount;
-import accounts.CurrentAccount;
 import accounts.InterestPoint;
 import accounts.StudentAccount;
 import creditCards.CreditCard;
+import accounts.accountFactories.BussinessAccountFactory;
+import accounts.accountFactories.CurrentAccountFactory;
+import accounts.accountFactories.SavingsAccountFactory;
+import accounts.accountFactories.StudentAccountFactory;
+import creditCards.CreditCardFactory;
 import people.Owner;
 import transfers.WithdrawService;
 
@@ -12,15 +16,20 @@ void main() {
     //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
     // to see how IntelliJ IDEA suggests fixing it.
     WithdrawService withdrawService = new WithdrawService();
+    CurrentAccountFactory currentAccountFactory = new CurrentAccountFactory();
+    BussinessAccountFactory bussinessAccountFactory = new BussinessAccountFactory();
+    SavingsAccountFactory savingsAccountFactory = new SavingsAccountFactory();
+    StudentAccountFactory studentAccountFactory = new StudentAccountFactory("gg");
+    CreditCardFactory creditCardFactory = new CreditCardFactory();
 
     Owner owner = new Owner("Tomas", "Pesek");
 
     List<BankAccount> accounts = new ArrayList<>();
 
-    BankAccount bankAccount = new CurrentAccount(owner, 1000);
+    BankAccount bankAccount = currentAccountFactory.create(owner,100);
     accounts.add(bankAccount);
 
-    BankAccount studentAccount = new StudentAccount(owner, 100);
+    BankAccount studentAccount = studentAccountFactory.create(owner, 100);
     accounts.add(studentAccount);
 
     for (BankAccount account : accounts) {
@@ -44,7 +53,7 @@ void main() {
     System.out.println("balance: " + bankAccount.getBalance());
 
 
-    CreditCard creditCard = new CreditCard(owner, 500);
+    CreditCard creditCard = creditCardFactory.create(owner,500);
     withdrawService.addToBalance(creditCard,1000);
     withdrawService.withdraw(creditCard,100);
 
