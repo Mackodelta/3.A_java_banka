@@ -35,6 +35,18 @@ public abstract class BankAccount implements Withdraw {
         this.balance = balance;
     }
 
+    public String getUuid() {
+        return uuid;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
     @Override
     public void setNewBalance(double balance) {
         this.balance = balance;
