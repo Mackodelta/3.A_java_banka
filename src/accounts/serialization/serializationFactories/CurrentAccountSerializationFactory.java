@@ -1,17 +1,15 @@
 package accounts.serialization.serializationFactories;
 
 import accounts.CurrentAccount;
-import accounts.serialization.AccountSerializationService;
-import accounts.serialization.CurrentAccountJsonSerialization;
-import accounts.serialization.CurrentAccountXmlSerialization;
+import accounts.serialization.*;
 
 public class CurrentAccountSerializationFactory implements AccountSerializationFactory<CurrentAccount>{
     @Override
     public AccountSerializationService<CurrentAccount> createJsonService() {
-        return new CurrentAccountJsonSerialization();
+        return new GsonAccountSerialization<>();
     }
     @Override
     public AccountSerializationService<CurrentAccount> createXmlService() {
-        return new CurrentAccountXmlSerialization();
+        return new JacksonXmlAccountSerialization<>();
     }
 }
