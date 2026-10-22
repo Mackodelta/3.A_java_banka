@@ -1,13 +1,12 @@
 package accounts.accountFactories;
 
-import accounts.AccountNumberGenerator;
-import accounts.BankAccount;
 import accounts.CurrentAccount;
-import people.Owner;
+import accounts.BankAccountFactory;
+import accounts.Owner;
 
-public class CurrentAccountFactory implements BankAccountFactory{
+public class CurrentAccountFactory implements BankAccountFactory {
     @Override
-    public BankAccount create(Owner owner, double balance) {
+    public CurrentAccount create(Owner owner, double balance) {
         CurrentAccount account = new CurrentAccount(owner, balance);
         account.setAccountNumber(AccountNumberGenerator.generate());
         return account;

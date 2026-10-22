@@ -1,11 +1,10 @@
 package accounts.accountFactories;
 
-import accounts.AccountNumberGenerator;
-import accounts.BankAccount;
 import accounts.StudentAccount;
-import people.Owner;
+import accounts.BankAccountFactory;
+import accounts.Owner;
 
-public class StudentAccountFactory implements BankAccountFactory{
+public class StudentAccountFactory implements BankAccountFactory {
     private final String school;
 
     public StudentAccountFactory(String school) {
@@ -13,9 +12,8 @@ public class StudentAccountFactory implements BankAccountFactory{
     }
 
     @Override
-    public BankAccount create(Owner owner, double balance) {
+    public StudentAccount create(Owner owner, double balance) {
         StudentAccount account = new StudentAccount(owner, this.school);
-        account.setNewBalance(balance);
         account.setAccountNumber(AccountNumberGenerator.generate());
         return account;
     }
