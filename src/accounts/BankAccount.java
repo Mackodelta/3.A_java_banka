@@ -8,13 +8,9 @@ import transfers.Withdraw;
 // kod banky  2010
 
 public abstract class BankAccount implements Withdraw {
-
-    private String uuid;
-
-    private String accountNumber; // 2102405518
-
-    private Owner owner;
-
+    protected String uuid = java.util.UUID.randomUUID().toString();
+    protected String accountNumber;
+    protected Owner owner;
     protected double balance;
 
     protected Notifier notifier = new EmailNotifier();
