@@ -1,8 +1,8 @@
 package accounts.accountFactories;
 
+import accounts.AccountNumberGenerator;
 import accounts.StudentAccount;
-import accounts.BankAccountFactory;
-import accounts.Owner;
+import people.Owner;
 
 public class StudentAccountFactory implements BankAccountFactory {
     private final String school;
