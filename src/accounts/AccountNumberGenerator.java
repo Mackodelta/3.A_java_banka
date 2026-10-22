@@ -1,6 +1,9 @@
+package accounts;
+
 import java.util.Random;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 
 public class AccountNumberGenerator {
     private static final String BANK_CODE = "2010";
