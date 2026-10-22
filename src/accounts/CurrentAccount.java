@@ -11,4 +11,8 @@ public class CurrentAccount extends BankAccount {
     public CurrentAccount(Owner owner, double balance) {
         super(owner, balance);
     }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 }

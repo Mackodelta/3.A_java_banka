@@ -2,8 +2,7 @@ package accounts;
 
 import people.Owner;
 
-public class StudentAccount extends BankAccount
-{
+public class StudentAccount extends BankAccount {
     private String school;
 
     public StudentAccount(Owner owner, String school) {
@@ -16,8 +15,11 @@ public class StudentAccount extends BankAccount
         super(owner, balance);
     }
 
-    public String getSchool()
-    {
+    public String getSchool() {
         return this.school;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 }
