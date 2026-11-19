@@ -3,13 +3,15 @@ package accounts.accountFactories;
 import accounts.*;
 import people.Owner;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class CurrentAccountFactory implements BankAccountFactory {
-    private final AccountNumberGeneratorFactory generatorFactory = new AccountNumberGeneratorFactory(
-            new SimpleAccountCreationLogger(),
-            new TimestampedAccountCreationLogger()
-    );
+    private final AccountNumberGeneratorFactory generatorFactory;
+
+    public CurrentAccountFactory(AccountNumberGeneratorFactory generatorFactory) {
+        this.generatorFactory = Objects.requireNonNull(generatorFactory, "generatorFactory must not be null");
+    }
 
     @Override
     public BankAccount create(Owner owner, double balance) {
