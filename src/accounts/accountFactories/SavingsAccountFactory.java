@@ -1,17 +1,19 @@
 package accounts.accountFactories;
 
-import accounts.AccountNumberGenerator;
-import accounts.AccountNumberGeneratorFactory;
-import accounts.BankAccount;
-import accounts.SavingsAccount;
+import accounts.*;
 import people.Owner;
 
 import java.util.UUID;
 
 public class SavingsAccountFactory implements BankAccountFactory{
+    private final AccountNumberGeneratorFactory generatorFactory = new AccountNumberGeneratorFactory(
+            new SimpleAccountCreationLogger(),
+            new TimestampedAccountCreationLogger()
+    );
+
     @Override
     public BankAccount create(Owner owner, double balance) {
-        AccountNumberGenerator generator = AccountNumberGeneratorFactory.createSimpleLogger();
+        AccountNumberGenerator generator = generatorFactory.createSimpleLogger();
         String uuid = UUID.randomUUID().toString();
         String accNum = generator.generate();
 
