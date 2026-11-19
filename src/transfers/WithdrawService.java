@@ -14,10 +14,6 @@ public class WithdrawService {
     private final TransferLoggerService loggerService;
     private final TransactionFactory transactionFactory;
 
-    public WithdrawService() {
-        this(new TransferLoggerService(), new TransactionFactory());
-    }
-
     public WithdrawService(TransferLoggerService loggerService, TransactionFactory transactionFactory) {
         this.loggerService = loggerService;
         this.transactionFactory = transactionFactory;

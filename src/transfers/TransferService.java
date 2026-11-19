@@ -6,10 +6,6 @@ public class TransferService {
     private final TransferLoggerService loggerService;
     private final TransactionFactory transactionFactory;
 
-    public TransferService() {
-        this(new TransferLoggerService(), new TransactionFactory());
-    }
-
     public TransferService(TransferLoggerService loggerService, TransactionFactory transactionFactory) {
         this.loggerService = loggerService;
         this.transactionFactory = transactionFactory;

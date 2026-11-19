@@ -8,6 +8,9 @@ import accounts.accountFactories.SavingsAccountFactory;
 import accounts.accountFactories.StudentAccountFactory;
 import creditCards.CreditCardFactory;
 import people.Owner;
+import transfers.Transaction;
+import transfers.TransactionFactory;
+import transfers.TransferLoggerService;
 import transfers.WithdrawService;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -15,7 +18,12 @@ import transfers.WithdrawService;
 void main() {
     //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
     // to see how IntelliJ IDEA suggests fixing it.
-    WithdrawService withdrawService = new WithdrawService();
+
+    List<Transaction> transactions = new ArrayList<>();
+    TransferLoggerService loggerService = new TransferLoggerService(transactions);
+    TransactionFactory transactionFactory = new TransactionFactory();
+    WithdrawService withdrawService = new WithdrawService(loggerService, transactionFactory);
+
     CurrentAccountFactory currentAccountFactory = new CurrentAccountFactory();
     BussinessAccountFactory bussinessAccountFactory = new BussinessAccountFactory();
     SavingsAccountFactory savingsAccountFactory = new SavingsAccountFactory();
