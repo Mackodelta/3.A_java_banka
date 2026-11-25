@@ -1,5 +1,6 @@
 package accounts.accountFactories;
 
+import Currency.CurrencyType;
 import accounts.*;
 import people.Owner;
 
@@ -14,13 +15,10 @@ public class BussinessAccountFactory implements BankAccountFactory{
     }
 
     @Override
-    public BankAccount create(Owner owner, double balance) {
+    public BankAccount create(Owner owner, double balance, CurrencyType currency) {
         AccountNumberGenerator generator = generatorFactory.createSimpleLogger();
         String uuid = UUID.randomUUID().toString();
         String accNum = generator.generate();
-
-        BusinessAccount account = new BusinessAccount(uuid, accNum, owner);
-        account.setNewBalance(balance);
-        return account;
+        return new BusinessAccount(uuid, accNum, owner, balance, currency);
     }
 }

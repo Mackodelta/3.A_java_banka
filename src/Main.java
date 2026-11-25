@@ -1,6 +1,4 @@
-import accounts.BankAccount;
-import accounts.InterestPoint;
-import accounts.StudentAccount;
+import accounts.*;
 import creditCards.CreditCard;
 import accounts.accountFactories.BussinessAccountFactory;
 import accounts.accountFactories.CurrentAccountFactory;
@@ -12,6 +10,7 @@ import transfers.Transaction;
 import transfers.TransactionFactory;
 import transfers.TransferLoggerService;
 import transfers.WithdrawService;
+import Currency.CurrencyType;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -24,9 +23,11 @@ void main() {
     TransactionFactory transactionFactory = new TransactionFactory();
     WithdrawService withdrawService = new WithdrawService(loggerService, transactionFactory);
 
-    CurrentAccountFactory currentAccountFactory = new CurrentAccountFactory();
-    BussinessAccountFactory bussinessAccountFactory = new BussinessAccountFactory();
-    SavingsAccountFactory savingsAccountFactory = new SavingsAccountFactory();
+    AccountNumberGeneratorFactory generatorFactory = new AccountNumberGeneratorFactory(new SimpleAccountCreationLogger(), new TimestampedAccountCreationLogger());
+
+    CurrentAccountFactory currentAccountFactory = new CurrentAccountFactory(generatorFactory);
+    BussinessAccountFactory bussinessAccountFactory = new BussinessAccountFactory(generatorFactory);
+    SavingsAccountFactory savingsAccountFactory = new SavingsAccountFactory(generatorFactory);
     StudentAccountFactory studentAccountFactory = new StudentAccountFactory("gg");
     CreditCardFactory creditCardFactory = new CreditCardFactory();
 
@@ -34,11 +35,14 @@ void main() {
 
     List<BankAccount> accounts = new ArrayList<>();
 
-    BankAccount bankAccount = currentAccountFactory.create(owner,100);
+    BankAccount bankAccount = currentAccountFactory.create(owner, 100, CurrencyType.CZK);
     accounts.add(bankAccount);
 
     BankAccount studentAccount = studentAccountFactory.create(owner, 100);
     accounts.add(studentAccount);
+
+    BankAccount robuxAccount = savingsAccountFactory.create(owner, 1000, CurrencyType.ROBUX);
+    accounts.add(robuxAccount);
 
     for (BankAccount account : accounts) {
         if (account instanceof InterestPoint) {
@@ -55,10 +59,12 @@ void main() {
         }
     }
 
-    withdrawService.withdraw(bankAccount, 500);
-    withdrawService.addToBalance(bankAccount,300);
-    withdrawService.addToBalance(bankAccount,100);
-    System.out.println("balance: " + bankAccount.getBalance());
+
+    withdrawService.addToBalance(bankAccount, 300);
+    withdrawService.addToBalance(bankAccount, 100);
+    withdrawService.withdraw(bankAccount, 200);
+    System.out.println("balance: " + bankAccount.formatBalance(CurrencyType.ROBUX));
+    loggerService.printStatement(bankAccount, CurrencyType.ROBUX);
 
 
     CreditCard creditCard = creditCardFactory.create(owner,500);

@@ -1,5 +1,6 @@
 package accounts;
 
+import Currency.CurrencyType;
 import people.Owner;
 
 public class StudentAccount extends BankAccount {
@@ -8,6 +9,11 @@ public class StudentAccount extends BankAccount {
     public StudentAccount(Owner owner, String school) {
         super(owner);
 
+        this.school = school;
+    }
+
+    public StudentAccount(Owner owner, String school, double balance, CurrencyType currency) {
+        super(owner, balance, currency);
         this.school = school;
     }
 

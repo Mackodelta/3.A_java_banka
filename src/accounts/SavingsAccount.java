@@ -1,5 +1,6 @@
 package accounts;
 
+import Currency.CurrencyType;
 import people.Owner;
 
 public class SavingsAccount extends BankAccount implements InterestPoint{
@@ -16,6 +17,12 @@ public class SavingsAccount extends BankAccount implements InterestPoint{
 
     public SavingsAccount(Owner owner, double balance) {
         super(owner, balance);
+    }
+
+    public SavingsAccount(Owner owner, double balance, CurrencyType currency) { super(owner, balance, currency); }
+
+    public SavingsAccount(String uuid, String accountNumber, Owner owner, double balance, CurrencyType currency) {
+        super(uuid, accountNumber, owner, balance, currency);
     }
 
     @Override

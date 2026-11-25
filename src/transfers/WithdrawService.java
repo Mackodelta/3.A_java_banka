@@ -20,7 +20,8 @@ public class WithdrawService {
     }
 
     public void withdraw(Withdraw withdrawObject, double amount) {
-        this.notifier.notify("Sub amount is " + amount);
+        String currency = (withdrawObject instanceof BankAccount b) ? " " + b.getCurrency() : "";
+        this.notifier.notify("Sub amount is " + amount + currency);
 
         double fee = (withdrawObject instanceof BusinessAccount) ? amount * BUSINESS_ACCOUNT_SUB_FEE : 0.0;
         double newBalance = withdrawObject.getBalance() - amount - fee;

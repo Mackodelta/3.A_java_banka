@@ -1,5 +1,6 @@
 package transfers;
 
+import Currency.CurrencyType;
 import accounts.BankAccount;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,5 +28,14 @@ public class TransferLoggerService {
         return transactions.stream()
                 .filter(t -> t.getFromAccount() == account || t.getToAccount() == account)
                 .collect(Collectors.toList());
+    }
+
+    public void printStatement(BankAccount account, CurrencyType target) {
+        System.out.println("Výpis účtu " + account.getAccountNumber()
+                + " (měna účtu: " + account.getCurrency() + ")");
+        for (Transaction t : getTransactionsForAccount(account)) {
+            System.out.println("  " + t.format(target));
+        }
+        System.out.println("Zůstatek: " + account.formatBalance(target));
     }
 }

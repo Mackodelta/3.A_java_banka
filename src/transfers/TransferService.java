@@ -22,7 +22,9 @@ public class TransferService {
         }
 
         from.setNewBalance(from.getBalance() - total);
-        to.setNewBalance(to.getBalance() + amount);
+
+        double received = from.getCurrency().convertTo(amount, to.getCurrency());
+        to.setNewBalance(to.getBalance() + received);
 
         // Zaznamenání transakce do historie
         Transaction transaction = transactionFactory.createTransfer(from, to, amount, fee);

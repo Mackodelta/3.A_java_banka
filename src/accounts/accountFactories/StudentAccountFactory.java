@@ -1,5 +1,6 @@
 package accounts.accountFactories;
 
+import Currency.CurrencyType;
 import accounts.*;
 import people.Owner;
 
@@ -21,11 +22,10 @@ public class StudentAccountFactory implements BankAccountFactory {
     }
 
     @Override
-    public StudentAccount create(Owner owner, double balance) {
+    public StudentAccount create(Owner owner, double balance, CurrencyType currency) {
         AccountNumberGenerator generator = generatorFactory.createSimpleLogger();
-        StudentAccount account = new StudentAccount(owner, this.school);
+        StudentAccount account = new StudentAccount(owner, this.school, balance, currency);
         account.setAccountNumber(generator.generate());
-        account.setNewBalance(balance);
         return account;
     }
 }

@@ -1,5 +1,6 @@
 package transfers;
 
+import Currency.CurrencyType;
 import accounts.BankAccount;
 import java.time.LocalDateTime;
 
@@ -28,14 +29,20 @@ public class Transaction {
     public double getAmount() { return amount; }
     public double getFee() { return fee; }
 
+    public CurrencyType getCurrency() {
+        return fromAccount != null ? fromAccount.getCurrency() : toAccount.getCurrency();
+    }
+
+    // řádek výpisu: měna účtu + přepočet do další měny
+    public String format(CurrencyType target) {
+        CurrencyType c = getCurrency();
+        return String.format("%-8s | %10.2f %s (≈ %.2f %s) | poplatek %.2f %s",
+                type, amount, c, c.convertTo(amount, target), target, fee, c);
+    }
+
     @Override
     public String toString() {
-        return "Transaction{" +
-                ", type=" + type +
-                ", from=" + (fromAccount != null ? fromAccount.getBalance() : "N/A") +
-                ", to=" + (toAccount != null ? toAccount.getBalance() : "N/A") +
-                ", amount=" + amount +
-                ", fee=" + fee +
-                '}';
+        return String.format("Transaction{type=%s, amount=%.2f %s, fee=%.2f %s}",
+                type, amount, getCurrency(), fee, getCurrency());
     }
 }
